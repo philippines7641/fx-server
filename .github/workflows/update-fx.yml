@@ -20,11 +20,11 @@ jobs:
 
       - name: Install packages
         run: npm install
-        working-directory: functions
+        working-directory: functions   # ← 이 줄 반드시 필요
 
       - name: Run FX script
         run: node index.js
-        working-directory: functions
+        working-directory: functions   # ← 이 줄도 반드시 필요
 
       - name: Commit JSON
         run: |
