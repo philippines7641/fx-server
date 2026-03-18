@@ -2,34 +2,39 @@ name: update-fx
 
 on:
   schedule:
-    - cron: "*/10 * * * *"
-  workflow_dispatch:
+    - cron: "*/10 * * * *"   # 10분마다 실행
+  workflow_dispatch:          # 수동 실행 가능
 
 jobs:
   update:
     runs-on: ubuntu-latest
 
     steps:
+      # 1️⃣ 소스 체크아웃
       - name: Checkout
         uses: actions/checkout@v4
 
+      # 2️⃣ Node.js 설치
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
+      # 3️⃣ functions 폴더에서 패키지 설치
       - name: Install packages
         run: npm install
-        working-directory: functions   # ← 이 줄 반드시 필요
+        working-directory: functions
 
+      # 4️⃣ FX 스크립트 실행
       - name: Run FX script
         run: node index.js
-        working-directory: functions   # ← 이 줄도 반드시 필요
+        working-directory: functions
 
+      # 5️⃣ fx_phil7641.json 커밋 및 push
       - name: Commit JSON
         run: |
           git config --global user.name "fx-bot"
           git config --global user.email "bot@example.com"
           git add public/fx_phil7641.json
           git commit -m "auto update fx" || echo "no changes"
-          git push
+          git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/philippines7641/fx-server.git HEAD:main
