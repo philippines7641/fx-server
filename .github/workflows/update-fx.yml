@@ -6,16 +6,30 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  update:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - uses: actions/setup-node@v3
-      with:
-        node-version: 18
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
 
-    - run: npm install
+      - name: Install packages
+        run: npm install
+        working-directory: functions
 
-    - run: node functions/index.js
+      - name: Run FX script
+        run: node index.js
+        working-directory: functions
+
+      - name: Commit JSON
+        run: |
+          git config --global user.name "fx-bot"
+          git config --global user.email "bot@example.com"
+          git add public/fx_phil7641.json
+          git commit -m "auto update fx" || echo "no changes"
+          git push
