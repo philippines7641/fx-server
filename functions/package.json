@@ -1,0 +1,21 @@
+{
+  "name": "functions",
+  "description": "Firebase Cloud Functions",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "18"
+  },
+  "main": "index.js",
+  "scripts": {
+    "lint": "echo lint skipped",
+    "serve": "firebase emulators:start --only functions",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "dependencies": {
+    "firebase-admin": "^11.10.1",
+    "firebase-functions": "^4.4.1",
+    "node-fetch": "^3.3.2"
+  }
+}
