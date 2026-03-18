@@ -30,11 +30,13 @@ jobs:
         run: node index.js
         working-directory: functions
 
-      # 5️⃣ fx_phil7641.json 커밋 및 push
-      - name: Commit JSON
+      # 5️⃣ fx_phil7641.json 커밋 및 push (PAT 사용)
+      - name: Commit and Push JSON
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}  # GitHub Personal Access Token
         run: |
           git config --global user.name "fx-bot"
           git config --global user.email "bot@example.com"
           git add public/fx_phil7641.json
           git commit -m "auto update fx" || echo "no changes"
-          git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/philippines7641/fx-server.git HEAD:main
+          git push https://x-access-token:${GH_PAT}@github.com/philippines7641/fx-server.git HEAD:main
