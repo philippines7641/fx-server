@@ -75,7 +75,7 @@ button:active {
 <body>
 
 <div class="container">
-  <h3>오늘의 행운 테스트</h3>
+  <h3>맛집 행운 테스트</h3>
   <button onclick="spin()">돌리기</button>
   <div id="result"></div>
 </div>
@@ -144,16 +144,16 @@ function randomAround(base) {
 
 function spin() {
   const el = document.getElementById("result");
-  el.innerText = "돌리는 중...";
+  el.innerText = "맛집 돌리는 중...";
 
   setTimeout(() => {
     const base = weightedPick();
     const point = randomAround(base);
 
     let text = "";
-    if (point === 0) text = "꽝 😅";
-    else if (point < 1000) text = "소소 🍀 " + point.toLocaleString();
-    else if (point < 5000) text = "좋다 👍 " + point.toLocaleString();
+    if (point === 0) text = "꽝꽝.. 😅";
+    else if (point < 1000) text = "소소소소 🍀 " + point.toLocaleString();
+    else if (point < 5000) text = "좋다좋아 👍 " + point.toLocaleString();
     else if (point < 15000) text = "오 꽤 괜찮은데 😏 " + point.toLocaleString();
     else text = "대박 🎉 " + point.toLocaleString();
 
